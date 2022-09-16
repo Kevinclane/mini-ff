@@ -1,0 +1,16 @@
+.hide {
+    visibility: hidden;
+    height: 0;
+    width: 0;
+}
+
+.combatant-img {
+    height: 30vh;
+    width: 30vh;
+    z-index: 100;
+}
+
+.mirror {
+    -webkit-transform: scaleX(-1);
+    transform: scaleX(-1);
+}

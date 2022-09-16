@@ -1,0 +1,15 @@
+.nameplate {
+    text-align: center;
+    background-color: antiquewhite;
+    color: black;
+    border-radius: 5px;
+    z-index: 50;
+}
+
+.activeTurn {
+    background-color: gold;
+}
+
+.walk {
+    transform: translateX(20vw);
+}

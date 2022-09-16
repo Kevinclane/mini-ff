@@ -1,0 +1,15 @@
+<div *ngIf="viewState == 'root'">
+    <div *ngFor="let action of availableActions" class="text-center">
+        <button class="btn btn-primary my-3" (click)="updateViewState(action)">
+            {{action.name}}
+        </button>
+    </div>
+</div>
+<div *ngIf="viewState == 'target'">
+    <div *ngFor="let target of encounter?.enemies" class="text-center">
+        <button (click)="targetFunction(target.id, encountersController, encounter, gameTimer)"
+            class="btn btn-primary my-3">
+            {{target.name}}
+        </button>
+    </div>
+</div>

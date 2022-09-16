@@ -1,0 +1,26 @@
+<div class="container-fluid fill-container bg-img">
+    <div class="row">
+        <div class="col-8 offset-2">
+            <div class="console-container">
+                <app-encounter-console [logs]="encounter.logs"></app-encounter-console>
+            </div>
+        </div>
+        <div class="col-1 offset-1">
+            <button class="btn btn-warning mt-2" (click)="_resetDB()">RESET GAME</button>
+        </div>
+    </div>
+    <div class="buffer-zone"></div>
+    <div class="row">
+        <div class="col-5">
+            <app-combatants [encounter]="encounter" [addCallback]="gameTimer.addCallback" [side]="'party'">
+            </app-combatants>
+        </div>
+        <div class="col-2">
+            <app-combatant-input [encounter]="encounter" [addCallback]="gameTimer.addCallback"></app-combatant-input>
+        </div>
+        <div class="col-5">
+            <app-combatants [encounter]="encounter" [addCallback]="gameTimer.addCallback" [side]="'enemy'">
+            </app-combatants>
+        </div>
+    </div>
+</div>

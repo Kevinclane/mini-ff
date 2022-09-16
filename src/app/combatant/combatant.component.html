@@ -1,0 +1,33 @@
+<div *ngIf="combatant">
+    <div class="nameplate" [ngClass]="{activeTurn: activeTurn()}">
+        {{combatant.name}} Lv:{{combatant.level}}
+        <div>
+            <app-resource-bar [type]="'health'" [stat]="combatant.stats.health"></app-resource-bar>
+        </div>
+        <div>
+            <app-resource-bar [type]="'mana'" [stat]="combatant.stats.mana"></app-resource-bar>
+        </div>
+    </div>
+
+    <div *ngFor="let img of combatant.imgs.IDLE">
+        <app-image-animation [img]="img" [currentImg]="currentImg" [side]="side">
+        </app-image-animation>
+    </div>
+    <div *ngFor="let img of combatant.imgs.ATTACK">
+        <app-image-animation [img]="img" [currentImg]="currentImg" [side]="side">
+        </app-image-animation>
+    </div>
+    <div *ngFor="let img of combatant.imgs.HURT">
+        <app-image-animation [img]="img" [currentImg]="currentImg" [side]="side">
+        </app-image-animation>
+    </div>
+    <div *ngFor="let img of combatant.imgs.WALK">
+        <app-image-animation [img]="img" [currentImg]="currentImg" [side]="side">
+        </app-image-animation>
+    </div>
+    <div *ngFor="let img of combatant.imgs.DEFEAT">
+        <app-image-animation [img]="img" [currentImg]="currentImg" [side]="side">
+        </app-image-animation>
+    </div>
+
+</div>
