@@ -1,5 +1,6 @@
 import { Injectable } from "@angular/core";
 import CallbackObject from "../models/implementors/callbackObject";
+import ICallbackState from "../models/interfaces/IcallbackState";
 
 function executeCallbacks(callbacks: CallbackObject[]) {
     let i = 0;
@@ -41,8 +42,11 @@ export default class GameTimer {
         return this.callbacks.find(cb => cb.id == id);
     }
 
-    updateCallbackState = (id: string,) => {
-
+    updateCallbackState = (id: string, state: ICallbackState) => {
+        let cb = this.getCallback(id);
+        if (cb) {
+            cb.state = state;
+        }
     }
 
 }

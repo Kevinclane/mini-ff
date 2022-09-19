@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import GameTimer from '../functionalityFiles/gameTimer';
 import ICombatant from '../models/interfaces/Icombatant';
 import IEncounter from '../models/interfaces/Iencounter';
 
@@ -10,13 +11,12 @@ import IEncounter from '../models/interfaces/Iencounter';
 })
 export class CombatantsComponent implements OnInit {
 
-  @Input('addCallback') addCallback: Function | null = null;
   @Input('side') side: string = "";
   @Input('encounter') encounter: IEncounter | null = null;
 
   combatants: ICombatant[] | undefined;
 
-  constructor() {
+  constructor(private _gameTimer: GameTimer) {
 
   }
 

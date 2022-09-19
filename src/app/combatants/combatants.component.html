@@ -1,20 +1,20 @@
 <div *ngIf="combatants" class="text-white">
     <div class="combatant-zone d-flex" [ngStyle]="positionImage()">
         <div *ngIf="combatants[1]">
-            <app-combatant [combatant]="combatants[1]" [addCallback]="addCallback" [side]="side"
-                [whosTurnId]="encounter?.whosTurnId"></app-combatant>
+            <app-combatant [combatant]="combatants[1]" [side]="side" [whosTurnId]="encounter?.whosTurnId">
+            </app-combatant>
         </div>
     </div>
     <div class="combatant-zone d-flex justify-content-end" [ngStyle]="positionImage()">
         <div *ngIf="combatants[0]">
-            <app-combatant [combatant]="combatants[0]" [addCallback]="addCallback" [side]="side"
-                [whosTurnId]="encounter?.whosTurnId"></app-combatant>
+            <app-combatant [combatant]="combatants[0]" [side]="side" [whosTurnId]="encounter?.whosTurnId">
+            </app-combatant>
         </div>
     </div>
     <div class="combatant-zone d-flex" [ngStyle]="positionImage()">
         <div *ngIf="combatants[2]">
-            <app-combatant [combatant]="combatants[2]" [addCallback]="addCallback" [side]="side"
-                [whosTurnId]="encounter?.whosTurnId"></app-combatant>
+            <app-combatant [combatant]="combatants[2]" [side]="side" [whosTurnId]="encounter?.whosTurnId">
+            </app-combatant>
         </div>
     </div>
 </div>

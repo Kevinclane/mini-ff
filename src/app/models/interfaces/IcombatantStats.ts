@@ -1,13 +1,8 @@
+import IStatPool from "./IstatPool"
 
 export interface ICombatantStats {
-    health: {
-        current: number,
-        max: number
-    },
-    mana: {
-        current: number,
-        max: number
-    },
+    health: IStatPool,
+    mana: IStatPool,
     speed: number,
     power: number,
     setStats: Function

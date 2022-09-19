@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { StatPool } from '../models/implementors/StatPool';
+import { StatPool } from '../models/implementors/statPool';
 import IStatPool from '../models/interfaces/IstatPool';
 
 @Component({

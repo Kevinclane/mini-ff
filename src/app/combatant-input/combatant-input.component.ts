@@ -14,10 +14,11 @@ import { EncountersController } from '../psudoServer/controllers/encountersContr
 export class CombatantInputComponent implements OnInit {
 
   @Input('encounter') encounter: IEncounter | null = null;
-  @Input('addCallback') addCallback: Function | null = null;
 
   gameTimer: GameTimer;
   encountersController: EncountersController;
+
+  enemies?: ICombatant[];
 
   viewState: string = "root";
   targetFunction: Function = () => { };
@@ -34,6 +35,16 @@ export class CombatantInputComponent implements OnInit {
     if (allCombatants) {
       let whosTurnCombatant: ICombatant | undefined = allCombatants.find(c => c.id == this.encounter?.whosTurnId);
       this.availableActions = this._actionFactory.getActions(whosTurnCombatant);
+    }
+    this.setupTargets();
+  }
+
+  setupTargets() {
+    this.enemies = this.encounter?.enemies;
+    if (this.enemies && this.enemies?.length > 1) {
+      let enemyBackup = this.enemies[1];
+      this.enemies.splice(1, 1);
+      this.enemies.unshift(enemyBackup)
     }
   }
 

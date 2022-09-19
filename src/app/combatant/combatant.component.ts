@@ -1,6 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { calculateAnimationTime } from '../functionalityFiles/animationCalculator';
+import GameTimer from '../functionalityFiles/gameTimer';
+import { ActionCSS } from '../models/implementors/actionCSS';
 import CallbackObject from '../models/implementors/callbackObject';
+import { CallbackState } from '../models/implementors/callbackState';
 import { Combatant } from '../models/implementors/combatant';
 import { ImageObject } from '../models/implementors/imageObject';
 import { MovementAnimation } from '../models/implementors/movementAnimation';
@@ -17,7 +20,6 @@ import IMovementAnimation from '../models/interfaces/IMovementAnimation';
 export class CombatantComponent implements OnInit {
 
   @Input() combatant: ICombatant;
-  @Input() addCallback: Function | null = null;
   @Input() side: string = "";
   @Input() whosTurnId: string | undefined = "";
 
@@ -35,25 +37,42 @@ export class CombatantComponent implements OnInit {
   currentImg: IImageObject = new ImageObject();
   index: number = 0;
 
-  //Can likely move these all into their own Interface/object
   movementAnimation: IMovementAnimation = new MovementAnimation();
+  actionCSS: ActionCSS = new ActionCSS();
+  orientation: string = "";
 
-  constructor() {
+  constructor(private _gameTimer: GameTimer) {
     this.combatant = new Combatant();
   }
 
   ngOnInit(): void {
     if (this.combatant) {
       let callbackObject = new CallbackObject(this.combatant.id, this.updateState.bind(this));
-      if (this.addCallback) {
-        this.addCallback(callbackObject);
+      if (this._gameTimer) {
+        this._gameTimer.addCallback(callbackObject);
       }
+    }
+    if (this.side == "party") {
+      this.orientation = "face-right";
+    } else {
+      this.orientation = "face-left";
     }
   }
 
   setAnimationSet(set: string): void {
     this.index = 0;
     this.currentAnimationSet = set;
+  }
+
+  returnToPosition() {
+    let cb = this._gameTimer.getCallback(this.combatant.id);
+
+    if (cb) {
+      cb.state.action = "returnToPosition";
+      // this.movementAnimation.returnAnimation();
+      this._gameTimer.updateCallbackState(this.combatant.id, cb?.state);
+    }
+
   }
 
   cycleImage() {
@@ -82,12 +101,30 @@ export class CombatantComponent implements OnInit {
         }
 
         break;
+      case "walk-back":
+        // debugger
+        this.currentImg = this.combatant.imgs.WALK[this.index];
+
+        if (this.index == this.combatant.imgs.WALK.length - 1) {
+          this.index = 0;
+        } else {
+          this.index++;
+        }
+
+        if (!this.movementAnimation.continueAnimation) {
+          this.setAnimationSet("idle");
+          this.movementAnimation.reset();
+          this.toggleOrientation();
+        }
+
+        break;
       case "attack":
         this.currentImg = this.combatant.imgs.ATTACK[this.index];
 
         if (this.index == this.combatant.imgs.ATTACK.length - 1) {
-          //likely have this chain into another function to have the character walk back before going idle
-          this.setAnimationSet("idle");
+          this.index = 0;
+
+          this.returnToPosition();
         } else {
           this.index++;
         }
@@ -96,12 +133,32 @@ export class CombatantComponent implements OnInit {
     }
   }
 
-  async updateState(state: ICallbackState): Promise<void> {
+  toggleOrientation() {
+    if (this.orientation == "face-right") {
+      this.orientation = "face-left";
+    } else {
+      this.orientation = "face-right";
+    }
+  }
+
+  updateState(state: ICallbackState) {
     switch (state.action) {
+      case "standby":
+        //intentionally doing nothing
+        break;
       case "attack":
         this.setAnimationSet("walk-to");
         this.movementAnimation.startAnimation(state.actionSourceIndex, state.actionTargetIndex);
-        state.resetState();
+        this.actionCSS.startWalk(this.movementAnimation.movementData);
+        state.action = "standby";
+        // state.resetState();
+        break;
+      case "returnToPosition":
+        this.setAnimationSet("walk-back");
+        this.toggleOrientation();
+        this.movementAnimation.returnAnimation();
+        this.actionCSS.returnWalk(this.movementAnimation.movementData.time);
+        state.action = "standby";
         break;
     }
 

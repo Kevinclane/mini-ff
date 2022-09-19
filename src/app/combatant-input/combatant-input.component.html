@@ -6,7 +6,7 @@
     </div>
 </div>
 <div *ngIf="viewState == 'target'">
-    <div *ngFor="let target of encounter?.enemies" class="text-center">
+    <div *ngFor="let target of enemies" class="text-center">
         <button (click)="targetFunction(target.id, encountersController, encounter, gameTimer)"
             class="btn btn-primary my-3">
             {{target.name}}

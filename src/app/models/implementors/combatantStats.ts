@@ -1,7 +1,7 @@
 
 import { ICombatantStats } from "../interfaces/IcombatantStats";
 import IStatPool from "../interfaces/IstatPool";
-import { StatPool } from "./StatPool";
+import { StatPool } from "./statPool";
 
 export class CombatantStats implements ICombatantStats {
 

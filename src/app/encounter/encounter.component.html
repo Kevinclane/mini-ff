@@ -12,14 +12,14 @@
     <div class="buffer-zone"></div>
     <div class="row">
         <div class="col-5">
-            <app-combatants [encounter]="encounter" [addCallback]="gameTimer.addCallback" [side]="'party'">
+            <app-combatants [encounter]="encounter" [side]="'party'">
             </app-combatants>
         </div>
         <div class="col-2">
-            <app-combatant-input [encounter]="encounter" [addCallback]="gameTimer.addCallback"></app-combatant-input>
+            <app-combatant-input [encounter]="encounter"></app-combatant-input>
         </div>
         <div class="col-5">
-            <app-combatants [encounter]="encounter" [addCallback]="gameTimer.addCallback" [side]="'enemy'">
+            <app-combatants [encounter]="encounter" [side]="'enemy'">
             </app-combatants>
         </div>
     </div>

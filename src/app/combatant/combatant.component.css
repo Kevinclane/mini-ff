@@ -11,5 +11,6 @@
 }
 
 .walk {
+    transition: 2s;
     transform: translateX(20vw);
 }

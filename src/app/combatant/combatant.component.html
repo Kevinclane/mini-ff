@@ -1,4 +1,4 @@
-<div *ngIf="combatant">
+<div *ngIf="combatant" [ngStyle]="actionCSS.cssClass">
     <div class="nameplate" [ngClass]="{activeTurn: activeTurn()}">
         {{combatant.name}} Lv:{{combatant.level}}
         <div>
@@ -10,23 +10,23 @@
     </div>
 
     <div *ngFor="let img of combatant.imgs.IDLE">
-        <app-image-animation [img]="img" [currentImg]="currentImg" [side]="side">
+        <app-image-animation [img]="img" [currentImg]="currentImg" [orientation]="orientation">
         </app-image-animation>
     </div>
     <div *ngFor="let img of combatant.imgs.ATTACK">
-        <app-image-animation [img]="img" [currentImg]="currentImg" [side]="side">
+        <app-image-animation [img]="img" [currentImg]="currentImg" [orientation]="orientation">
         </app-image-animation>
     </div>
     <div *ngFor="let img of combatant.imgs.HURT">
-        <app-image-animation [img]="img" [currentImg]="currentImg" [side]="side">
+        <app-image-animation [img]="img" [currentImg]="currentImg" [orientation]="orientation">
         </app-image-animation>
     </div>
     <div *ngFor="let img of combatant.imgs.WALK">
-        <app-image-animation [img]="img" [currentImg]="currentImg" [side]="side">
+        <app-image-animation [img]="img" [currentImg]="currentImg" [orientation]="orientation">
         </app-image-animation>
     </div>
     <div *ngFor="let img of combatant.imgs.DEFEAT">
-        <app-image-animation [img]="img" [currentImg]="currentImg" [side]="side">
+        <app-image-animation [img]="img" [currentImg]="currentImg" [orientation]="orientation">
         </app-image-animation>
     </div>
 

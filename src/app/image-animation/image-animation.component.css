@@ -10,7 +10,12 @@
     z-index: 100;
 }
 
-.mirror {
+.face-left {
     -webkit-transform: scaleX(-1);
     transform: scaleX(-1);
+}
+
+.face-right {
+    -webkit-transform: scaleX(1);
+    transform: scaleX(1);
 }

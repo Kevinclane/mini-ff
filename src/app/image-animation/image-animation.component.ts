@@ -11,9 +11,9 @@ export class ImageAnimationComponent implements OnInit {
 
   @Input() img: IImageObject = new ImageObject();
   @Input() currentImg: IImageObject = new ImageObject();
-  @Input() side: string = "";
+  // @Input() side: string = "";
 
-  orientation: string = "";
+  @Input() orientation: string = "";
 
   isHidden = () => {
     if (this.currentImg.id == this.img.id) {
@@ -27,9 +27,10 @@ export class ImageAnimationComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if (this.side == "enemy") {
-      this.orientation = "mirror";
-    }
+    // if (this.side == "enemy") {
+    //   this.orientation = "mirror";
+    // }
+    console.log(this.orientation)
   }
 
 }
